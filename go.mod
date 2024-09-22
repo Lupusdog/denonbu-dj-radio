@@ -1,3 +1,3 @@
-module github.com/Lupusdog/denonbu-dj-radio-api
+module github.com/Lupusdog/denonbu-dj-radio
 
 go 1.21.3

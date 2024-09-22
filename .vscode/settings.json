@@ -1,0 +1,17 @@
+{
+    "gopls": {
+        "staticcheck": true
+    },
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    "go.lintTool": "staticcheck",
+    "go.lintFlags": [
+        "-checks",
+        "all"
+    ],
+    "go.vetOnSave": "package",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    }
+}

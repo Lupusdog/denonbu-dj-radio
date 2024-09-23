@@ -4,7 +4,7 @@ import (
 	"github.com/Lupusdog/denonbu-dj-radio/pkg/constants/status"
 )
 
-type AppSuccess struct {
+type appSuccess struct {
 	Status     string      `json:"status"`      // 成功のステータス
 	StatusCode int         `json:"status_code"` // 成功のステータスコード
 	StatusMsg  string      `json:"status_msg"`  // 成功の概要
@@ -12,26 +12,26 @@ type AppSuccess struct {
 }
 
 // 成功用の返答の構造体を生成する
-func NewAppSuccess(statusCode status.ResponseStatusCode, data interface{}) AppSuccess {
+func NewAppSuccess(statusCode status.ResponseStatusCode, data interface{}) appSuccess {
 	if statusCode < status.OK || statusCode > status.NoContent {
-		return AppSuccess{
+		return appSuccess{
 			string(status.Error),
 			int(status.InternalError),
 			string(status.ResponseStatusMsg[status.InternalError]),
-			"AppSuccess statusCode is invalid",
+			"appSuccess statusCode is invalid",
 		}
 	}
 
 	if data == nil {
-		return AppSuccess{
+		return appSuccess{
 			string(status.Error),
 			int(status.InternalError),
 			string(status.ResponseStatusMsg[statusCode]),
-			"AppSuccess data is nil",
+			"appSuccess data is nil",
 		}
 	}
 
-	return AppSuccess{
+	return appSuccess{
 		string(status.Success),
 		int(statusCode),
 		string(status.ResponseStatusMsg[statusCode]),

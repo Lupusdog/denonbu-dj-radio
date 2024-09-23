@@ -4,33 +4,33 @@ import (
 	"github.com/Lupusdog/denonbu-dj-radio/pkg/constants/status"
 )
 
-type AppError struct {
+type appError struct {
 	Status     string `json:"status"`      // エラーのステータス
 	StatusCode int    `json:"status_code"` // エラーのステータスコード
 	StatusMsg  string `json:"status_msg"`  // エラーの概要
 	Detail     string `json:"-"`           // エラーの詳細(JSONに載せず、ログに出力する)
 }
 
-func NewAppError(statusCode status.ResponseStatusCode, originError error) AppError {
+func NewAppError(statusCode status.ResponseStatusCode, originError error) appError {
 	if statusCode < status.InvalidRequest || statusCode > status.GatewayTimeout {
-		return AppError{
+		return appError{
 			string(status.Error),
 			int(status.InternalError),
 			string(status.ResponseStatusMsg[status.InternalError]),
-			"AppError statusCode is invalid",
+			"appError statusCode is invalid",
 		}
 	}
 
 	if originError == nil {
-		return AppError{
+		return appError{
 			string(status.Error),
 			int(status.InternalError),
 			string(status.ResponseStatusMsg[statusCode]),
-			"AppError originError is nil",
+			"appError originError is nil",
 		}
 	}
 
-	return AppError{
+	return appError{
 		string(status.Error),
 		int(statusCode),
 		string(status.ResponseStatusMsg[statusCode]),
@@ -38,6 +38,6 @@ func NewAppError(statusCode status.ResponseStatusCode, originError error) AppErr
 	}
 }
 
-func (e *AppError) Error() string {
+func (e *appError) Error() string {
 	return e.Detail
 }
